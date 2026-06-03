@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wireframe Sketsa My Academic UNIKOM</title>
+  <style>
+    /* --- SKETCH WIREFRAME THEME --- */
+    :root {
+      --bg: #ffffff;
+      --text: #000000;
+      --border-thick: 2px;
+      --border-thin: 1px;
+      --placeholder: #e0e0e0;
+      --active-blue: #d0e7ff; /* Aksen biru muda untuk item aktif */
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    /* --- LAYOUT UTAMA --- */
+    .app {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      min-height: 100vh;
+    }
+
+    /* --- SIDEBAR SKETSA --- */
+    .sidebar {
+      border-right: var(--border-thick) solid #000;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .brand-box {
+      border: var(--border-thick) solid #000;
+      padding: 12px;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .brand-box h1 { font-size: 16px; margin: 0; }
+
+    .nav-section-title {
+      font-size: 11px;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin: 15px 0 5px;
+    }
+
+    .nav-btn {
+      width: 100%;
+      background: transparent;
+      border: var(--border-thick) solid #000;
+      padding: 10px;
+      text-align: left;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-btn::before {
+      content: "";
+      width: 16px;
+      height: 16px;
+      border: var(--border-thin) solid #000;
+      display: inline-block;
+    }
+
+    .nav-btn.active { background: var(--active-blue); }
+
+    /* --- AREA KONTEN --- */
+    .main { padding: 25px; display: flex; flex-direction: column; gap: 20px; }
+
+    /* Top Bar Sketsa */
+    .topbar {
+      display: grid;
+      grid-template-columns: 1fr auto auto auto;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .global-search {
+      border: var(--border-thick) solid #000;
+      padding: 12px;
+      width: 100%;
+    }
+
+    .btn-sketch {
+      border: var(--border-thick) solid #000;
+      background: #fff;
+      padding: 10px 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn-sketch.active { background: var(--active-blue); }
+
+    /* Judul & Header */
+    .page-header h2 { font-size: 28px; margin: 0; }
+    .page-header p { margin: 5px 0; color: #444; }
+    .divider { border-top: var(--border-thick) solid #000; margin: 10px 0; }
+
+    /* Grid & Cards */
+    .grid { display: grid; gap: 15px; }
+    .cols-4 { grid-template-columns: repeat(4, 1fr); }
+    .cols-3 { grid-template-columns: repeat(3, 1fr); }
+
+    .sketch-card {
+      border: var(--border-thick) solid #000;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .placeholder-gray { background: var(--placeholder); border: var(--border-thick) solid #000; height: 40px; }
+    .placeholder-square { width: 40px; height: 40px; background: var(--placeholder); border: var(--border-thick) solid #000; }
+    .dashed-line { border-bottom: var(--border-thin) dashed #000; height: 10px; width: 100%; }
+
+    /* Pages Visibility */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      border: var(--border-thick) solid #000;
+      background: #fff;
+      padding: 15px;
+      display: none;
+      font-weight: bold;
+      z-index: 100;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app">
+    <!-- SIDEBAR: Penempatan sesuai file code sumber -->
+    <aside class="sidebar">
+      <div class="brand-box">
+        <h1>UA MY ACADEMIC</h1>
+        <small>UNIKOM Wireframe</small>
+      </div>
+
+      <div class="nav-section-title">Menu Utama</div>
+      <button class="nav-btn active" onclick="openPage('dashboard', this)">Beranda</button>
+      
+      <div class="nav-section-title">Akademik</div>
+      <button class="nav-btn" onclick="openPage('akademik', this)">KRS</button>
+      <button class="nav-btn" onclick="openPage('akademik', this)">Pengisian Kelas</button>
+      <button class="nav-btn" onclick="openPage('akademik', this)">Jadwal Kuliah</button>
+      
+      <div class="nav-section-title">Hasil Studi</div>
+      <button class="nav-btn" onclick="openPage('nilai', this)">Riwayat Nilai</button>
+      <button class="nav-btn" onclick="openPage('nilai', this)">Kehadiran</button>
+    </aside>
+
+    <main class="main">
+      <!-- TOPBAR: Sesuai struktur wireframe di gambar -->
+      <header class="topbar">
+        <input type="text" class="global-search" placeholder="Search: cari KRS, jadwal, nilai, kehadiran..." id="mainSearch">
+        <button class="btn-sketch" onclick="showToast('AI Help dibuka')">AI Help</button>
+        <button class="btn-sketch" onclick="showToast('Notifikasi dibuka')">Notif</button>
+        <button class="btn-sketch" onclick="showToast('Profil Haifa Afina')">Haifa Afina</button>
+      </header>
+
+      <!-- TAB NAVIGATION -->
+      <div style="display: flex; gap: 10px;">
+        <button class="btn-sketch active">Wireframe Dashboard</button>
+        <button class="btn-sketch">Wireframe KRS</button>
+        <button class="btn-sketch">Wireframe Accessibility</button>
+      </div>
+
+      <!-- PAGE: DASHBOARD -->
+      <section id="dashboard" class="page active">
+        <div class="page-header">
+          <h2>Wireframe Dashboard Baru</h2>
+          <p>Semua area, tombol, kartu, quick access, AI, dan jadwal dapat diklik.</p>
+        </div>
+        <div class="divider"></div>
+
+        <!-- HERO BOX (Sesuai Gambar 0f0201.png) -->
+        <div class="sketch-card" style="margin-bottom: 20px;">
+          <div class="placeholder-gray" style="height: 30px;"></div>
+          <div class="dashed-line"></div>
+          <div class="dashed-line" style="width: 70%;"></div>
+        </div>
+
+        <!-- GRID KARTU BAWAH -->
+        <div class="grid cols-4">
+          <div class="sketch-card">
+            <div class="placeholder-square"></div>
+            <p><strong>Status KRS</strong></p>
+            <div class="placeholder-gray" style="height: 20px;"></div>
+            <div class="dashed-line"></div>
+          </div>
+          <div class="sketch-card">
+            <div class="placeholder-square"></div>
+            <p><strong>Jadwal Hari Ini</strong></p>
+            <div class="placeholder-gray" style="height: 20px;"></div>
+            <div class="dashed-line"></div>
+          </div>
+          <div class="sketch-card">
+            <div class="placeholder-square"></div>
+            <p><strong>Deadline Akademik</strong></p>
+            <div class="placeholder-gray" style="height: 20px;"></div>
+            <div class="dashed-line"></div>
+          </div>
+          <div class="sketch-card">
+            <div class="placeholder-square"></div>
+            <p><strong>Kehadiran</strong></p>
+            <div class="placeholder-gray" style="height: 20px;"></div>
+            <div class="dashed-line"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE: AKADEMIK (Interaktif Placeholder) -->
+      <section id="akademik" class="page">
+        <div class="page-header">
+          <h2>Akademik</h2>
+          <p>Manajemen pengisian mata kuliah dan jadwal.</p>
+        </div>
+        <div class="divider"></div>
+        <div class="grid cols-3">
+          <div class="sketch-card"><h3>KRS Wizard</h3><div class="dashed-line"></div><button class="btn-sketch">Buka</button></div>
+          <div class="sketch-card"><h3>Jadwal</h3><div class="dashed-line"></div><button class="btn-sketch">Buka</button></div>
+        </div>
+      </section>
+
+      <!-- PAGE: NILAI (Interaktif Placeholder) -->
+      <section id="nilai" class="page">
+        <div class="page-header">
+          <h2>Hasil Studi</h2>
+          <p>Riwayat nilai dan kehadiran mahasiswa.</p>
+        </div>
+        <div class="divider"></div>
+        <div class="sketch-card">
+          <div class="placeholder-gray"></div>
+          <div class="dashed-line"></div>
+          <div class="dashed-line"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script>
+    // FUNGSI NAVIGASI: Mengaktifkan halaman sesuai file code Anda
+    function openPage(pageId, btn) {
+      // Sembunyikan semua halaman
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      // Tampilkan halaman target
+      const target = document.getElementById(pageId);
+      if(target) target.classList.add('active');
+
+      // Update status tombol sidebar
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      showToast("Membuka menu: " + btn.innerText);
+    }
+
+    // FUNGSI FEEDBACK: Menampilkan toast
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.innerText = msg;
+      t.style.display = 'block';
+      setTimeout(() => { t.style.display = 'none'; }, 2000);
+    }
+
+    // SEARCH INTERACTIVITY SIMPLE
+    document.getElementById('mainSearch').addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        showToast("Mencari: " + this.value);
+      }
+    });
+  </script>
+</body>
+</html>
